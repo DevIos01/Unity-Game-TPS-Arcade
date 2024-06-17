@@ -255,11 +255,11 @@ Transform:
   m_GameObject: {fileID: 298376068}
   serializedVersion: 2
   m_LocalRotation: {x: 0.30713758, y: -0, z: -0, w: 0.95166516}
-  m_LocalPosition: {x: 0, y: 3.145, z: -2.509}
+  m_LocalPosition: {x: -1.41, y: 2.725, z: -2.509}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4094155830442706763}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 35.774, y: 0, z: 0}
 --- !u!81 &298376070
 AudioListener:
@@ -1158,7 +1158,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2012393542205750028, guid: ac5d3dba4ba355c4ea3d5431d59d9ced, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.42
+      value: -0.37
       objectReference: {fileID: 0}
     - target: {fileID: 2012393542205750028, guid: ac5d3dba4ba355c4ea3d5431d59d9ced, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1578,10 +1578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2012393542205750028, guid: ac5d3dba4ba355c4ea3d5431d59d9ced, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 298376069}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1199828797424591286, guid: ac5d3dba4ba355c4ea3d5431d59d9ced, type: 3}
       insertIndex: -1
@@ -1595,6 +1592,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1199828797424591286, guid: ac5d3dba4ba355c4ea3d5431d59d9ced, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4094155830442706765}
+    - targetCorrespondingSourceObject: {fileID: 1199828797424591286, guid: ac5d3dba4ba355c4ea3d5431d59d9ced, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4094155830442706766}
   m_SourcePrefab: {fileID: 100100000, guid: ac5d3dba4ba355c4ea3d5431d59d9ced, type: 3}
 --- !u!1 &4094155830442706759 stripped
 GameObject:
@@ -1645,11 +1645,6 @@ CapsuleCollider:
   m_Height: 1.869745
   m_Direction: 1
   m_Center: {x: 0, y: 0.87988985, z: 0}
---- !u!4 &4094155830442706763 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2012393542205750028, guid: ac5d3dba4ba355c4ea3d5431d59d9ced, type: 3}
-  m_PrefabInstance: {fileID: 4094155830442706758}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4094155830442706764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1662,7 +1657,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb2bfce5adaac7c4a93f7b84ed0e592d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  walkSpeed: 5
+  runSpeed: 10
   turnSpeed: 180
 --- !u!143 &4094155830442706765
 CharacterController:
@@ -1690,6 +1686,33 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &4094155830442706766
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4094155830442706759}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1703,3 +1726,4 @@ SceneRoots:
   - {fileID: 1981982490}
   - {fileID: 2014633832}
   - {fileID: 379453304}
+  - {fileID: 298376069}

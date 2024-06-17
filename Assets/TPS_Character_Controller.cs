@@ -1,40 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TPS_Character_Controller : MonoBehaviour
 {
-    public float speed = 5.0f;
-    public float turnSpeed = 180.0f;
+    public float walkSpeed = 5.0f;
+    public float runSpeed = 10.0f;
+    public float turnSpeed = 200.0f;
 
-    private CharacterController controller;
     private Animator animator;
-
-    private Camera mainCamera;
+    private Rigidbody rb;
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-        mainCamera = Camera.main;
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        mainCamera.transform.position = new Vector3(transform.position.x, mainCamera.transform.position.y, transform.position.z);
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+        bool isRunning = Input.GetKey(KeyCode.LeftShift);
 
-        float moveSpeed = Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput);
+        // Calculate the movement speed and direction
+        float speed = isRunning ? runSpeed : walkSpeed;
+        Vector3 movement = new Vector3(horizontal, 0, vertical).normalized * speed * Time.deltaTime;
 
-        controller.Move(transform.TransformDirection(new Vector3(horizontalInput, 0.0f, verticalInput)) * speed * moveSpeed * Time.deltaTime);
+        // Rotate the character based on horizontal input
+        transform.Rotate(0, horizontal * turnSpeed * Time.deltaTime, 0);
 
-        if (horizontalInput != 0)
-        {
-            float rotationAmount = horizontalInput * turnSpeed * Time.deltaTime;
-            transform.Rotate(Vector3.up, rotationAmount);
-        }
+        // Move the character
+        rb.MovePosition(rb.position + transform.TransformDirection(movement));
 
-        animator.SetFloat("MovementSpeed", moveSpeed);
+        // Update animation parameters
+        HandleAnimations(movement, horizontal, isRunning);
+    }
+
+    private void HandleAnimations(Vector3 movement, float horizontal, bool isRunning)
+    {
+        // Determine whether the character is walking or running
+        bool isWalking = movement.magnitude > 0 && !isRunning;
+
+        animator.SetBool("IsWalking", isWalking);
+        animator.SetBool("IsRunning", isRunning);
+        animator.SetFloat("Speed", movement.magnitude);
+        animator.SetFloat("Turn", horizontal);
     }
 }
